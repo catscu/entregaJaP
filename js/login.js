@@ -18,12 +18,20 @@ function verificar(){
 }
 
 function desconectar(){
-    let usuario = localStorage.getItem('usuario');
-
-    usuario.estado="desconectado";
     localStorage.clear();
+    onLoad();
     signOut();
+    location.href="login.html";
 }
+
+/*function guardarCheckbox(){
+    let check = document.getElementById('rem');
+    
+    if(check.value === checked){
+        true
+    }
+    
+}*/
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
