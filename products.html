@@ -22,13 +22,33 @@
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
         <a class="py-2 d-none d-md-inline-block" href="login.html">Ingresar</a>
+        <div class="dropdown-contain">
+          <button class="btn btn-dark dropdown-toggle" id="usuario" type="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"></button>
+          <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="Menu dropdown">
+            <a class="dropdown-item" href="#">Carrito</a>
+            <a class="dropdown-item" href="#">Perfil</a>            
+            <a class="dropdown-item" onclick="desconectar();">Desconectar</a>
+          </div>
+        </div> 
       </div>
     </nav>
     
     <div class="container p-5">
       <div class="text-center p-4">
         <h2>Productos</h2>
+        <p class="lead">Verás aquí todos los productos del sitio.</p>
     </div>
+    <div>
+      <i class="fa fa-search"></i>
+      <input type="search" id="buscador" placeholder="Buscar">
+      <label for="form-control"></label>
+      <button class="fa fa-sort-amount-up" id="asc"> USD</button>
+      <button class="fa fa-sort-amount-down" id="des"> USD</button>
+      <button class="fa fa-chart-line" id="rel"> Relevancia</button>
+      <label for="form-control">Mín. <input type="number" id="min" value="0">  Máx. <input type="number" id="max" value="100000"></label>
+      
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="list-group" id="lista-productos">

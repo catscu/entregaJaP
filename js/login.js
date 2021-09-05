@@ -21,7 +21,7 @@ function desconectar(){
     localStorage.clear();
     onLoad();
     signOut();
-    location.href="login.html";
+    location.href="index.html";
 }
 
 /*function guardarCheckbox(){
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     /*if(usuario.estado =='conectado'){
         location.href = "index.html";
     }
-    /*si logeo, al usar desconectar no me deja entrar de vuelta a login.html igual
+    /*si logeo, al usar desconectar no me deja entrar de vuelta a login.html 
      entra en un bucle*/
 
 });

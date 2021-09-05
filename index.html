@@ -33,7 +33,15 @@
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
         <a class="py-2 d-none d-md-inline-block" href="login.html">Ingresar</a>
         <button class="btn btn-danger" onclick="desconectar();" >Desconectar</button>
-      </div>
+        
+        <div class="dropdown-contain">
+          <button class="btn btn-dark dropdown-toggle" id="usuario" type="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"></button>
+          <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="Menu dropdown">
+            <a class="dropdown-item" href="#">Carrito</a>
+            <a class="dropdown-item" href="#">Perfil</a>            
+            <a class="dropdown-item" onclick="desconectar();">Desconectar</a>
+          </div>
+        </div>    
     </nav>
     <div id="conectado"></div>
     <main role="main">
