@@ -60,7 +60,7 @@ function verificacion() {
     let textoEscrito = document.getElementById("buscador").value;
     
     let listafiltrada = productsArray.filter((product) => { //filter devuelve un nuevo array conteniendo los coincidentes
-        return product.name.toLowerCase().indexOf(textoEscrito.toLowerCase()) > -1; //si lo escrito está en el array devuelve su posición
+        return (product.name.toLowerCase().indexOf(textoEscrito.toLowerCase()) && product.description.toLowerCase().indexOf(textoEscrito.toLowerCase())) > -1; //si lo escrito está en el array devuelve su posición
         //si no lo está devuelve -1
     })
     showProductsList(listafiltrada); // escribo la lista filtrada
