@@ -11,6 +11,13 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/dropzone.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
 
   <style>
     .bd-placeholder-img {
@@ -27,6 +34,12 @@
         font-size: 3.5rem;
       }
     }
+
+    .dropdown-menu a{
+      color: #FFFFFF !important;
+      background-color: rgb(52,58,64) !important;
+    }
+
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -40,26 +53,147 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
       <a class="py-2 d-none d-md-inline-block" href="login.html">Ingresar</a>
+      
       <div class="dropdown-contain">
         <button class="btn btn-dark dropdown-toggle" id="usuario" type="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"></button>
         <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="Menu dropdown">
-          <a class="dropdown-item" href="#">Carrito</a>
-          <a class="dropdown-item" href="#">Perfil</a>            
-          <a class="dropdown-item" onclick="desconectar();">Desconectar</a>
+          <a class="dropdown-item" href="cart.html">Mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Perfil</a>
         </div>
       </div> 
     </div>
   </nav>
+  
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    <div class="text-center p-4">
+      <h2>Mi carrito</h2>
+      <p class="lead">Verás aquí todos los productos seleccionados a comprar.</p>
     </div>
+
+    <div class="container" style="text-align: right;">
+      <button class="btn btn-light" id="pes" onclick="pesos();">UYU</button>
+      <button class="btn btn-light" id="dol" onclick="dolares();">USD</button>
+    </div>
+
+    <div class="container">
+      <table class="table table-unbordered table-hover w-45 my-4">
+        <thead class="table-borderless"> <!-- Encabezado -->
+          <tr>
+            <th scope="col">Artículo</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Costo unitario</th>                
+            <th scope="col">Precio</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="cart"> <!-- Contenido -->
+        </tbody>
+      </table>
+    </div>
+    
+
+    <div class="container mt-5">
+      <h4>Envío</h4>
+      <form class="m-4" id="formEnvio">
+        
+        <div class="form-group">
+          <label for="calle">Calle:</label>
+          <input id="calle" class="form-control w-25" type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="puerta">N° de puerta:</label>
+          <input id="puerta" class="form-control w-25" type="number" required>
+        </div>
+        <div class="form-group">
+          <label for="esquina">Esquina:</label>
+          <input id="esquina" class="form-control w-25" type="text" required>
+        </div><br>
+
+
+        <p>Método de envío:</p>
+        <div>
+          <div>
+            <input type="radio" id="premium" name="envio" value="15" onchange="costosCarrito();" checked>
+            <label for="premium">Premium (2 a 5 días) - 15%</label>
+          </div>
+          <div>
+            <input type="radio" id="express" name="envio" value="7" onchange="costosCarrito();">
+            <label for="express">Express (5 a 8 días) - 7%</label>
+          </div>        
+          <div>
+            <input type="radio" id="standard" name="envio" value="5" onchange="costosCarrito();">
+            <label for="standard">Standard (12 a 15 días) - 5%</label>
+          </div>
+        </div>
+        <span id="porcentaje" hidden></span>
+        
+      </form>
+    </div>
+
+    <div class="container mt-5">
+      <div class="list-group-item list-group-item-action flex-column">
+        <div class="row">
+            <h5 class="mb-1 col-md-9"><strong>Subtotal</strong></h5>
+            <h5 id="monSub" class="col-md-1">USD</h5><h5 id="subtotal"  class="col-md-2"></h5>
+        </div>
+        <p class="mb-1">Costo total de los artículos</p>
+      </div>
+      <div class="list-group-item list-group-item-action flex-column">
+        <div class="row">
+            <h5 class="mb-1 col-md-9"><strong>Método de envío</strong></h5>
+            <h5 id="monEnvio" class="col-md-1">USD</h5><h5 id="metEnvio" class="col-md-2"></h5>
+        </div>
+        <p class="mb-1">Según el método de envío elegido</p>
+      </div>
+      <div class="list-group-item list-group-item-action flex-column">
+        <div class="row">
+            <h5 class="mb-1 col-md-9"><strong>Total</strong></h5>
+            <h5 id="monTot" class="col-md-1">USD</h5><h5 id="total" class="col-md-2"></h5>
+        </div>
+        <p class="pb-1"></p>
+      </div><br><br>
+
+      <span>Método de pago:</span>
+      <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#tipoPago">Selecciona</button><br><br>
+
+      <button type="button" class="btn btn-success btn-lg" id="compra" onclick="validar();">Comprar</button>
+
+
+    </div>
+    <div class="modal fade" id="tipoPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"><i class="fas fa-times"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="" class="" id="modalForm">
+              <label for="cuentaBan"><input type="radio" id="cuentaBan" name="pago" value="cuentaBan"> Cuenta bancaria</label><br>
+              <label for="numCuenta">N° cuenta <input type="number" id="numCuenta" class="form-control w-75" required></label><br><br>
+
+              <label for="tarjeta"><input type="radio" id="tarjeta" name="pago" value="tarjeta"> Tarjeta</label><br>
+              <label for="numTar">N° tarjeta <input type="number" id="numTar" class="form-control w-75" required></label>
+              <label for="numTar">CSV <input type="number" id="csv" class="form-control w-50" required></label>
+              <label for="numTar">Fecha (MM/AA) <input type="month" id="fecha" class="form-control" required></label>
+
+          </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" class="close" data-dismiss="modal" aria-label="Close">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
+
+
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -68,11 +202,7 @@
       <div></div>
     </div>
   </div>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/dropzone.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
+  
 </body>
 
 </html>

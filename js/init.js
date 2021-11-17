@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   if(usuario !== null){
     document.getElementById("usuario").innerHTML=usuario.nombre;
+    //document.getElementById("imagen").innerHTML=usuario.imagen;
+
   }else{
     document.getElementById("usuario").innerHTML="Invitado";
   }

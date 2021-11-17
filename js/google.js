@@ -14,6 +14,11 @@ function onSignIn(googleUser) {
     let usuario={};
 
     usuario.nombre=profile.getGivenName();
+    usuario.apellido=profile.getFamilyName();
+    usuario.imagen=profile.getImageUrl();
+    usuario.email=profile.getEmail();
+    usuario.edad = "";
+    usuario.phone = "";
     usuario.estado="conectado";
     localStorage.setItem('usuario', JSON.stringify(usuario));
 

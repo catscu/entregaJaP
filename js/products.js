@@ -12,7 +12,7 @@ function showProductsList(array){
     if(product.cost >= min && product.cost <= max )
         {
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
+            <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + product.imgSrc + `" alt="` + product.desc + `" class="img-thumbnail">
@@ -28,7 +28,7 @@ function showProductsList(array){
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
             `
         }
         document.getElementById("lista-productos").innerHTML = htmlContentToAppend;

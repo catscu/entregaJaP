@@ -11,6 +11,10 @@ function verificar(){
         location.href = "index.html";
         usuario.nombre = dato.value;
         usuario.estado = "conectado";
+        usuario.imagen = "img/avatar.png";
+        usuario.apellido = "";
+        usuario.edad = "";
+        usuario.phone = "";
 
         localStorage.setItem('usuario', JSON.stringify(usuario));
     }

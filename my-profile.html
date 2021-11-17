@@ -12,7 +12,22 @@
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/dropzone.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/my-profile.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/google.js"></script>
+  <script src="js/md5.js"></script>
+  <script src="js/md5.min.js"></script>
+
   <style>
+    body, footer{
+      background: rgb(176,238,174);
+      background: linear-gradient(90deg, rgba(176,238,174,1) 0%, rgba(148,187,233,1) 100%);
+    }
+
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -27,6 +42,29 @@
         font-size: 3.5rem;
       }
     }
+
+    .dropdown-menu a{
+      color: #FFFFFF !important;
+      background-color: rgb(52,58,64) !important;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      
+    }
+
+    .form-group {
+    flex-grow: 2;
+    flex-flow: column;
+    }
+
+    #datos{
+    flex-grow: 0;    
+    flex-flow: column;
+    }
+    
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -40,20 +78,70 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
       <a class="py-2 d-none d-md-inline-block" href="login.html">Ingresar</a>
+
+      <div class="dropdown-contain">
+        <!--<div id="imagen"></div>-->
+        <button class="btn btn-dark dropdown-toggle" id="usuario" type="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"></button>
+        <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="Menu dropdown">
+          <a class="dropdown-item" href="cart.html">Mi carrito</a> 
+          <a class="dropdown-item" href="my-profile.html">Perfil</a>
+        </div>
+      </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="p-5">
+    <div class="text-center p-4">
+      <h2 style="color: rgb(3, 187, 65);">Mi Perfil</h2>
+      <hr class="my-3">
     </div>
+
+
+    <div class="container perfil">
+      <div class="form-group row">
+        
+        <img id="imagenPerfil" class="rounded-circle" src="img/avatar.png" height="200" width="200" alt="imagen perfil"><br><br>
+        <input type="file" onchange="previewFile();"><br><br>
+
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control w-25" id="nombre" placeholder="Ingresar nombre">      
+      
+        <label for="apellido">Apellido</label>
+        <input type="text" class="form-control w-25" id="apellido" placeholder="Ingresar apellido">
+     
+        <label for="edad">Edad</label>
+        <input type="number" class="form-control w-25" id="edad" min="0" placeholder="Ingresar edad">
+      
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control w-25" id="email" placeholder="Ingresar e-mail">
+      
+        <label for="phone">Teléfono</label>
+        <input type="text" class="form-control w-25" id="phone" placeholder="Ingresar teléfono">
+        
+        <label for="clave">Contraseña</label>
+        <input type="password" class="form-control w-25" id="clave" placeholder="Ingresar contraseña"><br>
+     
+        <button style="width: 25%;" class="btn btn-success btn-sm" onclick="guardar();">Guardar perfil</button>
+      </div>
+  
+      <div id="contenido" hidden></div>
+      
+      <div id="datos" class="row">
+        <img id="img" class="rounded-circle" src="img/avatar.png" alt="imagen" height="200" width="200"><br><br>
+        <p><b>Nombre:</b> <span id="nom"></span></p><br>
+        <p><b>Apellido:</b> <span id="ap"></span></p><br>
+        <p><b>Edad:</b> <span id="ed"></span></p><br>
+        <b>E-mail:</b> <span id="em"></span><br><br>
+        <p><b>Teléfono:</b> <span id="tel"></span></p><br>
+      </div>
+    </div>
+    
+
+    
   </div>
   <footer class="text-muted bg-light">
     <div class="container">
+      <a href="https://i.ibb.co/9W820G8/whyHow.jpg">imagen guerdada con imgBB</a>
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
@@ -72,11 +160,7 @@
       <div></div>
     </div>
   </div>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/dropzone.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/my-profile.js"></script>
+  
 </body>
 
 </html>

@@ -13,6 +13,19 @@
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/category-info.js"></script>
+  <script src="login.html"></script>
+  <script src="google.html"></script>
+  <style>
+    .dropdown-menu a{
+      color: #FFFFFF !important;
+      background-color: rgb(52,58,64) !important;
+      }
+  </style>
 </head>
 
 <body>
@@ -22,8 +35,16 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
       <a class="py-2 d-none d-md-inline-block" href="login.html">Ingresar</a>
+
+      <div class="dropdown-contain">
+        <button class="btn btn-dark dropdown-toggle" id="usuario" type="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"></button>
+        <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="Menu dropdown">
+          <a class="dropdown-item" href="cart.html">Mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Perfil</a>            
+          <a class="dropdown-item" onclick="desconectar();">Desconectar</a>
+        </div>
+      </div>
     </div>
   </nav>
   <main role="main">
@@ -78,10 +99,7 @@
       <div></div>
     </div>
   </div>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/category-info.js"></script>
+  
 </body>
 
 </html>

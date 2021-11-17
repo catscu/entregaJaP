@@ -22,6 +22,12 @@
     <script src="js/init.js"></script>
     <script src="js/google.js"></script>
     <script src="js/login.js"></script>
+    <style>
+      .dropdown-menu a{
+      color: #FFFFFF !important;
+      background-color: rgb(52,58,64) !important;
+      }
+    </style>
   </head>
   <body>
     <nav class="site-header sticky-top py-1 bg-dark">
@@ -30,15 +36,13 @@
         <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
         <a class="py-2 d-none d-md-inline-block" href="login.html">Ingresar</a>
-        <button class="btn btn-danger" onclick="desconectar();" >Desconectar</button>
         
         <div class="dropdown-contain">
           <button class="btn btn-dark dropdown-toggle" id="usuario" type="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"></button>
           <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="Menu dropdown">
-            <a class="dropdown-item" href="#">Carrito</a>
-            <a class="dropdown-item" href="#">Perfil</a>            
+            <a class="dropdown-item" href="cart.html">Mi carrito</a>
+            <a class="dropdown-item" href="my-profile.html">Perfil</a>            
             <a class="dropdown-item" onclick="desconectar();">Desconectar</a>
           </div>
         </div>    
